@@ -31,7 +31,7 @@ let color = match matrix[frame+x][y] {
 };
 ```
 ### Scrolling speed  
-Modify scrolling speed at line `50` by changing the sleeping time in milliseconds.
+Modify scrolling speed at line `51` by changing the sleeping time in milliseconds.
 ```rust
 let wait = time::Duration::from_millis(100);
 ```
