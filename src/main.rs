@@ -47,6 +47,7 @@ fn main() {
         // Prefix for complete matrix command
         let mut msg = vec![240u8, 0u8, 32u8, 41u8, 2u8, 12u8, 3u8];
     
+        // Sleep between frames
         let wait = time::Duration::from_millis(100);
         thread::sleep(wait);
 

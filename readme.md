@@ -18,3 +18,20 @@ gh repo clone alelouis/lpx-text-display
 ```
 cargo run your_text
 ```
+
+## Customize
+Main things you could want to change are **colors** and **scrolling speed**.
+
+### Color  
+Modify background and foreground on respectively line `56` and `57`.
+```rust
+let color = match matrix[frame+x][y] {
+    true => vec![0u8, 0u8, 0u8],
+    false => vec![127u8, 0u8, 0u8],
+};
+```
+### Scrolling speed  
+Modify scrolling speed at line `50` by changing the sleeping time in milliseconds.
+```rust
+let wait = time::Duration::from_millis(100);
+```
