@@ -1,4 +1,4 @@
-## lpx-text-display
+# lpx-text-display
 
 Small utility binary to display text on the 8x8 LED surface of an Novation Launchpad X.
 
