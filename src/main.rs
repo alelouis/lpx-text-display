@@ -1,7 +1,7 @@
 extern crate midir;
 extern crate font8x8;
 mod midi;
-
+use std::env;
 use std::{thread, time};
 use font8x8::{BASIC_FONTS, UnicodeFonts};
 
@@ -11,22 +11,23 @@ fn xy_to_index(x: u8, y: u8) -> u8 {
 }
 
 fn main() {
+
+    // Get arguments 
+    let args: Vec<String> = env::args().collect();
+    let text = format!(" {} ", &args[1]);
+    
+
     // Get connection to LPX
     let mut lpx_out = midi::get_output_connection("Launchpad X LPX MIDI In".to_string());
     
     // Go to Programmer mode
     lpx_out.send(&[0xF0, 0x00, 0x20, 0x29, 0x02, 0x0C, 0x0E, 0x01, 0xF7]).unwrap();
-    
-   
-    // Define text to display
-    const TEXT: &str = " JI T'AIME TOI";
-    
+     
     // Placeholder matrix for sentence
-    let mut matrix = [[false; 8]; 8*TEXT.len()];
+    let mut matrix = vec![[false; 8]; 8*text.len()];
     
     // Fill matrix with boolean value of chars
-    for (i, c) in TEXT.chars().enumerate() {
-        println!("{c}");
+    for (i, c) in text.chars().enumerate() {
         for x in 0..8 {
             for y in 0..8 {
                 if let Some(glyph) = BASIC_FONTS.get(c) {
@@ -41,7 +42,6 @@ fn main() {
     
     // Append messages for all LEDs
     for frame in 0..matrix.len()-8 {
-        println!("f:{frame}");
         
         // Prefix for complete matrix command
         let mut msg = vec![240u8, 0u8, 32u8, 41u8, 2u8, 12u8, 3u8];
@@ -64,10 +64,8 @@ fn main() {
                 // Compute LED index
                 let idx: u8 = xy_to_index(x as u8, y as u8);
                 let mut led = vec![3u8, idx, r, v, b];
-                //println!("led:{led:?}");
 
                 msg.append(&mut led);
-                println!("len msg:{}", msg.len());
             }
         }
         // Add end of message byte
