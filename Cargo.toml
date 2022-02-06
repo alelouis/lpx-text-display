@@ -1,5 +1,5 @@
 [package]
-name = "launchpad-x-controller"
+name = "lpx-text-display"
 version = "0.1.0"
 edition = "2021"
 
