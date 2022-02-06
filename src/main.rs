@@ -1,6 +1,8 @@
 extern crate midir;
 extern crate font8x8;
+
 mod midi;
+
 use std::env;
 use std::{thread, time};
 use font8x8::{BASIC_FONTS, UnicodeFonts};
@@ -15,7 +17,6 @@ fn main() {
     // Get arguments 
     let args: Vec<String> = env::args().collect();
     let text = format!(" {} ", &args[1]);
-    
 
     // Get connection to LPX
     let mut lpx_out = midi::get_output_connection("Launchpad X LPX MIDI In".to_string());
