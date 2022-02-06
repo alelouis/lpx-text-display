@@ -1,6 +1,7 @@
 extern crate midir;
 mod midi;
 
+/// Convert from x, y (right, up) to LED index
 fn xy_to_index(x: u8, y: u8) -> u8 {
     11 + x + y * 10
 }
@@ -27,7 +28,6 @@ fn main() {
             // Compute LED index
             let idx: u8 = xy_to_index(x, y);
             let mut led = vec![3u8, idx, r, v, b];
-            
 
             msg.append(&mut led);
         }
